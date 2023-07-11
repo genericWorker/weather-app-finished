@@ -64,7 +64,7 @@ let weather = {
     document.querySelector(".wind").innerText =
       "Wind speed: " + speed + speedLabel;  
       document.querySelector(".deg").innerText =
-      "Direction: " + deg + " °";
+      "Direction: " + deg + " ° "  + getCardinalDirection(deg) + ""
     document.querySelector(".weather").classList.remove("loading");
      document.body.style.backgroundImage =
         "url('https://source.unsplash.com/1600x900/?" + name + "')";
@@ -100,6 +100,19 @@ document
       weather.search();
     }
   });
+
+  function getCardinalDirection(angle) {
+   // const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    return directions[Math.round(angle / 45) % 8];
+  }
+
+  function degToCompass(angle) {
+    var val = Math.floor((num / 22.5) + 0.5);
+    var arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+    return arr[(val % 16)];
+}
+
 
   function  fetchUserCity() {
     let apiKey =  "841afa96ceb940da8f6157a7f16cc527"; 
