@@ -46,11 +46,18 @@ let weather = {
   },
   displayWeather: function (data) {
     const { name } = data;
+    const country = data.sys.country;  
     const { icon, description } = data.weather[0];
     const { temp, temp_min, temp_max, feels_like, humidity } = data.main;
     const { speed, deg } = data.wind;
     const dt = data.dt; 
-    document.querySelector(".city").innerText =  name;
+    if (country !== "") {
+      document.querySelector(".city").innerText =  name + ", " + country; 
+    }
+    else {
+      document.querySelector(".city").innerText =  name; 
+    } 
+   // document.querySelector(".countryName").innerText = country; 
     document.querySelector(".icon").src =
       "https://openweathermap.org/img/wn/" + icon + ".png";
       document.querySelector(".time").innerText = getLocalDate(dt); 
